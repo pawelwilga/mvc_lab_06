@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "tauri": "concurrently \"npm run start\" \"tauri dev\""
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +16,13 @@
     "laboratory-classes-6": "file:"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "nodemon": "^3.1.9"
+  },
+  "pkg": {
+    "assets": [
+      "views/**/*",
+      "public/**/*"
+    ]
   }
 }
-

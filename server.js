@@ -1,5 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const ejs = require('ejs'); // na potrzeby pakowania wymagane jest jawne require
+
+const path = require('path');
+
+const basePath = process.pkg ? path.dirname(process.execPath) : __dirname;
+const viewsPath = path.join(basePath, 'views');
+const publicPath = path.join(basePath, 'public');
+
 
 const { PORT } = require("./config");
 const logger = require("./utils/logger");
@@ -15,9 +23,9 @@ const cartController = require("./controllers/cartController");
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views", viewsPath);
 
-app.use(express.static(getFileFromAbsolutePath("public")));
+app.use(express.static(publicPath));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((request, _response, next) => {
